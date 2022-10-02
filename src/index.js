@@ -7,6 +7,10 @@ const app = express()
 const port = 3000
 
 const route = require('./routes')
+const db = require('./config/db')
+
+// Kết nối db
+db.connect()
 
 // HTTP logger
 // app.use(morgan('combined'))
@@ -19,7 +23,9 @@ app.engine(
     })
 )
 app.set('view engine', 'hbs')
-app.set('views', path.join(__dirname, 'resources/views'))
+// Dùng: 'resources', 'views' thay cho: 'resources/views' sẽ tự thêm các kí tự
+// ngăn cách đường dẫn phù hợp với đường dẫn trên các hệ điều hành khác nhau
+app.set('views', path.join(__dirname, 'resources', 'views'))
 
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true }))
@@ -28,5 +34,5 @@ app.use(express.json())
 route(app)
 
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
+    console.log(`App listening on port ${port}`)
 })
