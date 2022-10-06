@@ -1,13 +1,14 @@
 const Course = require('../models/Course')
+const { mongooseToObjectAll } = require('../../util/mongoose')
 
 class SiteController {
     // [GET] /
-    index(req, res) {
-        Course.find({}, (error, courses) => {
-            if (!error) res.json(courses)
-            else res.status(500).json({ error: 'Lỗi!' })
-        })
-        // res.render('home')
+    index(req, res, next) {
+        Course.find({})
+            .then((courses) => {
+                res.render('home', { courses: mongooseToObjectAll(courses) })
+            })
+            .catch(next)
     }
 
     // [GET] /search

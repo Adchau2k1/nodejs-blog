@@ -1,1 +1,16 @@
-<h2 class="">Trang chủ</h2>
+<div class="mt-4 mb-4">
+    <div class="row">
+        {{#each courses}}
+            <div class="col-sm-6 col-lg-4">
+                <div class="mt-4 card" style="width: 18rem;">
+                    <img src="{{this.img}}" class="card-img-top" alt="Ảnh">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <p class="card-text">{{this.desc}}</p>
+                        <a href="" class="btn btn-primary">Mua khoá học</a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
